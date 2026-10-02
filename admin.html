@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel do dono — Valora Pods NS</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF3D81"/><stop offset=".55" stop-color="#8B4DFF"/><stop offset="1" stop-color="#22E4FF"/></linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7DF3FF"/><stop offset="1" stop-color="#22E4FF"/></linearGradient>
+  </defs>
+  <symbol id="pod" viewBox="0 0 120 240">
+    <rect x="45" y="3" width="30" height="24" rx="9" fill="#1A0F45"/>
+    <rect x="33" y="22" width="54" height="72" rx="17" fill="#fff" fill-opacity=".18" stroke="#1A0F45" stroke-width="4"/>
+    <rect x="40" y="52" width="40" height="36" rx="11" fill="url(#g2)"/>
+    <circle cx="52" cy="66" r="3.5" fill="#fff" fill-opacity=".8"/><circle cx="66" cy="76" r="2.5" fill="#fff" fill-opacity=".7"/>
+    <rect x="20" y="88" width="80" height="148" rx="28" fill="url(#g1)" stroke="#1A0F45" stroke-width="4"/>
+    <rect x="31" y="102" width="8" height="112" rx="4" fill="#fff" fill-opacity=".3"/>
+    <rect x="34" y="136" width="56" height="48" rx="15" fill="#1A0F45"/>
+    <text x="62" y="173" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="34" letter-spacing="-1" fill="#C6FF3D">NS</text>
+    <circle cx="60" cy="210" r="5.5" fill="#C6FF3D"/>
+  </symbol>
+</svg>
+
+<section id="login" class="login"><form id="login-form" class="box">
+  <svg class="lp-big" viewBox="0 0 120 240" aria-hidden="true"><use href="#pod"/></svg>
+  <h1>Painel do dono</h1><p>Entre com a senha de administrador.</p>
+  <input type="password" id="senha" placeholder="Senha" required autofocus>
+  <button class="btn solid">Entrar</button><small id="erro"></small>
+  <a href="index.html">Voltar à loja</a></form></section>
+
+<div id="app" class="app" hidden>
+<header><h1><svg class="lp" viewBox="0 0 120 240" aria-hidden="true"><use href="#pod"/></svg>Painel</h1>
+  <nav id="tabs"><button class="on" data-t="produtos">Produtos</button><button data-t="pedidos">Pedidos <b id="n-ped"></b></button><button data-t="vendas">Vendas</button><button data-t="marketing">Marketing</button><button data-t="config">Configurações</button></nav>
+  <span><a href="index.html">Ver loja</a> <button id="sair" class="link">Sair</button></span></header>
+
+<main>
+<section id="t-produtos" class="tab">
+  <div class="stats" id="stats"></div>
+  <form id="pform" class="panel">
+    <h2 id="ptitulo">Novo produto</h2>
+    <input type="hidden" id="pid">
+    <label>Nome<input id="nome" required></label>
+    <label>Categoria<input id="cat" list="cats" required><datalist id="cats"><option>Descartável</option><option>Refilável</option><option>Pod</option><option>Acessório</option></datalist></label>
+    <label>Descrição curta<input id="sabor" placeholder="Ex.: Descartável 15.000 puffs"></label>
+    <div style="grid-column:1/-1;display:grid;gap:.6rem"><h4>Sabores (o cliente escolhe um na loja)</h4>
+      <div class="acts"><input id="sab-in" placeholder="Digite um sabor e aperte Enter"><button type="button" class="btn" id="sab-add">Adicionar sabor</button></div>
+      <div id="sab-list" class="elist"></div></div>
+    <label>Preço (R$)<input id="preco" type="number" step="0.01" min="0" required></label>
+    <label>Estoque<input id="estoque" type="number" min="0" required></label>
+    <label>Cor do card<input id="cor" type="color" value="#5B4BFF"></label>
+    <label>Foto<input id="foto" type="file" accept="image/*"></label>
+    <label>Desconto da promoção (%, 0 = sem promoção)<input id="desc" type="number" min="0" max="90" value="0"></label>
+    <label>Preço final<input id="pfinal" readonly></label>
+    <label>Selo do anúncio<select id="selo"><option value="">Sem selo</option><option value="promo">🔥 Promoção</option><option value="relampago">⚡ Oferta relâmpago</option><option value="top">⭐ Mais vendido</option><option value="novo">🆕 Novidade</option></select></label>
+    <label class="chk"><input id="destaque" type="checkbox"> Mostrar em destaque (card grande)</label>
+    <div class="acts"><button class="btn solid">Salvar produto</button><button type="button" class="btn" id="cancel" hidden>Cancelar edição</button></div>
+  </form>
+  <div class="tbl"><table><thead><tr><th></th><th>Produto</th><th>Preço</th><th>Estoque</th><th></th></tr></thead><tbody id="plist"></tbody></table></div>
+</section>
+<section id="t-pedidos" class="tab" hidden><div class="chips" id="ofiltro"></div><div id="olist" class="orders"></div></section>
+<section id="t-vendas" class="tab" hidden><div class="stats" id="v-per"></div><div class="stats" id="v-fin"></div>
+  <div class="panel"><h2>Faturamento dos últimos 7 dias</h2><div id="v-7" style="grid-column:1/-1"></div></div>
+  <div class="panel"><h2>Faturamento por mês (ano atual)</h2><div id="v-12" style="grid-column:1/-1"></div></div>
+  <div class="two-col"><div class="panel one"><h2>Produtos mais vendidos</h2><div id="v-top"></div></div>
+  <div class="panel one"><h2>Pagamento e entregas</h2><div id="v-pg"></div></div></div></section>
+
+<section id="t-marketing" class="tab" hidden>
+  <form id="mform" class="panel"><h2>Faixa de anúncio no topo da loja</h2>
+  <label class="chk"><input id="m-on" type="checkbox"> Mostrar faixa de anúncio</label>
+  <label>Texto do anúncio<input id="m-txt" placeholder="Ex.: Frete grátis neste fim de semana!"></label>
+  <div class="acts"><button class="btn solid">Salvar anúncio</button></div></form>
+  <div class="panel"><h2>Cupons de desconto</h2>
+  <form id="kform" class="acts" style="grid-column:1/-1"><input id="k-cod" placeholder="Código (ex.: VERAO10)" required><input id="k-pct" type="number" min="1" max="90" placeholder="% de desconto" required><button class="btn solid">Criar cupom</button></form>
+  <div id="klist" class="elist"></div>
+  <p style="grid-column:1/-1;color:var(--mut)">Para colocar um produto em promoção (selo 🔥 e preço riscado), edite o produto na aba Produtos e defina o desconto.</p></div></section>
+
+<section id="t-config" class="tab" hidden>
+  <form id="cform" class="panel"><h2>Configurações da loja</h2>
+  <label>Nome da loja<input id="c-nome" required></label>
+  <label>Frase de apresentação (página inicial)<input id="c-slogan" placeholder="Pods, descartáveis e acessórios selecionados."></label>
+  <label>Horário de atendimento<input id="c-horario" placeholder="Seg a Sáb, 10h às 22h"></label>
+  <label>Área de entrega<input id="c-area" placeholder="Bairros ou cidades atendidos"></label>
+  <label>Taxa de entrega (R$)<input id="c-taxa" type="number" min="0" step="0.01"></label>
+  <label>Frete grátis a partir de (R$, 0 = desligado)<input id="c-gratis" type="number" min="0" step="0.01"></label>
+  <label>Pedido mínimo (R$, 0 = sem mínimo)<input id="c-min" type="number" min="0" step="0.01"></label>
+  <label>WhatsApp de contato (só números, com DDI)<input id="c-zap" placeholder="5511999999999"></label>
+  <label>Instagram (sem @)<input id="c-insta"></label>
+  <label>Nova senha do painel<input id="c-senha" type="password" minlength="6" required></label>
+  <label class="chk"><input id="c-aberta" type="checkbox"> Loja aberta para pedidos</label>
+  <div class="acts"><button class="btn solid">Salvar configurações</button></div></form>
+  <div class="panel"><h2>Entregadores</h2>
+  <form id="eform" class="acts" style="grid-column:1/-1"><input id="e-nome" placeholder="Nome do entregador" required><button class="btn solid">Adicionar</button></form>
+  <div id="elist" class="elist"></div></div>
+  <div class="panel"><h2>Dados da loja</h2>
+  <p style="grid-column:1/-1;color:var(--mut)">Os dados ficam salvos neste navegador. Faça backup de vez em quando.</p>
+  <div class="acts"><button class="btn" id="exp">Exportar backup</button><label class="btn" style="cursor:pointer">Importar backup<input id="imp" type="file" accept=".json" hidden></label>
+  <button class="btn del" id="zpe">Apagar todos os pedidos</button><button class="btn del" id="zpr">Restaurar produtos de exemplo</button></div></div>
+</section>
+</main></div>
+<div class="toast" id="toast"></div>
+<script src="store.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

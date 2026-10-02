@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Valora Pods NS — Loja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF3D81"/><stop offset=".55" stop-color="#8B4DFF"/><stop offset="1" stop-color="#22E4FF"/></linearGradient>
+    <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7DF3FF"/><stop offset="1" stop-color="#22E4FF"/></linearGradient>
+  </defs>
+  <symbol id="pod" viewBox="0 0 120 240">
+    <rect x="45" y="3" width="30" height="24" rx="9" fill="#1A0F45"/>
+    <rect x="33" y="22" width="54" height="72" rx="17" fill="#fff" fill-opacity=".18" stroke="#1A0F45" stroke-width="4"/>
+    <rect x="40" y="52" width="40" height="36" rx="11" fill="url(#g2)"/>
+    <circle cx="52" cy="66" r="3.5" fill="#fff" fill-opacity=".8"/><circle cx="66" cy="76" r="2.5" fill="#fff" fill-opacity=".7"/>
+    <rect x="20" y="88" width="80" height="148" rx="28" fill="url(#g1)" stroke="#1A0F45" stroke-width="4"/>
+    <rect x="31" y="102" width="8" height="112" rx="4" fill="#fff" fill-opacity=".3"/>
+    <rect x="34" y="136" width="56" height="48" rx="15" fill="#1A0F45"/>
+    <text x="62" y="173" text-anchor="middle" font-family="Bricolage Grotesque,sans-serif" font-weight="800" font-size="34" letter-spacing="-1" fill="#C6FF3D">NS</text>
+    <circle cx="60" cy="210" r="5.5" fill="#C6FF3D"/>
+  </symbol>
+</svg>
+
+<div id="gate" class="gate" role="dialog" aria-modal="true"><div class="gate-box">
+  <svg class="gate-pod" viewBox="0 0 120 240"><use href="#pod"/></svg>
+  <h2>Só para maiores de 18 anos</h2>
+  <p>Os produtos contêm nicotina, que causa dependência. Confirme sua idade para entrar.</p>
+  <div class="row"><button class="btn solid" id="gate-ok">Tenho 18 anos ou mais</button><a class="btn" href="https://www.google.com">Sair</a></div>
+</div></div>
+
+<div id="aviso" class="aviso" hidden></div>
+<header class="top"><a class="logo" href="index.html" id="logo"><svg class="lp" viewBox="0 0 120 240" aria-hidden="true"><use href="#pod"/></svg><span id="logo-t">Valora Pods</span></a>
+  <nav><a href="#ofertas-sec">Ofertas</a><a href="#catalogo">Catálogo</a><a href="#como">Como funciona</a><a href="#faq">Dúvidas</a><a href="admin.html">Painel</a></nav>
+  <button class="btn solid cart-btn" id="open-cart" aria-label="Abrir carrinho">Carrinho <b id="cart-count">0</b></button></header>
+
+<main>
+<section class="hero">
+  <div class="hero-txt"><h1>Sabor que acompanha o seu <em>ritmo.</em></h1>
+  <p id="hero-p">Pods, descartáveis e acessórios selecionados. Peça agora e receba em casa.</p>
+  <div class="row l"><a class="btn big" href="#catalogo">Quero ver os sabores</a><span class="pill">Entrega rápida</span></div></div>
+  <div class="hero-art" aria-hidden="true">
+    <span class="glow"></span><span class="ring"></span>
+    <span class="pf p1"></span><span class="pf p2"></span><span class="pf p3"></span>
+    <svg class="pod-big" viewBox="0 0 120 240"><use href="#pod"/></svg>
+    <span class="float f1">+15K puffs</span><span class="float f2">Sabores gelados</span>
+  </div>
+</section>
+<div class="marquee" aria-hidden="true"><div><span>Entrega rápida</span><span>Sabores novos toda semana</span><span>Pague na entrega ou online</span><span>Entrega rápida</span><span>Sabores novos toda semana</span><span>Pague na entrega ou online</span></div></div>
+
+<section id="ofertas-sec" class="wrap" hidden><div class="bar"><h2>🔥 Ofertas</h2></div><div class="grid" id="ofertas"></div></section>
+
+<section id="catalogo" class="wrap">
+  <div class="bar"><h2>Catálogo</h2>
+  <input id="busca" type="search" placeholder="Buscar por nome ou sabor" aria-label="Buscar produtos">
+  <div class="chips" id="chips"></div></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section class="wrap" id="vantagens"><div class="bar"><h2>Por que comprar aqui</h2></div><div class="feat">
+  <div><h3>Entrega até você</h3><p>Informe o endereço no carrinho e acompanhe o pedido com a loja.</p></div>
+  <div><h3>Pague do seu jeito</h3><p>Escolha pagar online agora ou pagar na entrega.</p></div>
+  <div><h3>Estoque em tempo real</h3><p>Só aparece para comprar o que está disponível.</p></div>
+  <div><h3>Promoções toda semana</h3><p>Fique de olho na seção de ofertas e use cupons de desconto.</p></div></div></section>
+
+<section class="wrap" id="como"><div class="bar"><h2>Como funciona</h2></div><ol class="steps">
+  <li><h3>Escolha</h3><p>Navegue pelo catálogo e adicione ao carrinho.</p></li>
+  <li><h3>Informe o endereço</h3><p>Preencha nome, telefone e onde quer receber.</p></li>
+  <li><h3>Defina o pagamento</h3><p>Pague agora ou na entrega. Tem cupom? Aplique no carrinho.</p></li>
+  <li><h3>Receba em casa</h3><p>Um entregador leva o pedido até você.</p></li></ol></section>
+
+<section class="wrap faq" id="faq"><div class="bar"><h2>Dúvidas frequentes</h2></div>
+  <details><summary>Preciso ser maior de idade?</summary><p>Sim. A venda é só para maiores de 18 anos, e a idade pode ser conferida na entrega.</p></details>
+  <details><summary>Quais são as formas de pagamento?</summary><p>Você pode pagar online na hora do pedido ou pagar ao entregador, conforme escolher no carrinho.</p></details>
+  <details><summary>Como uso um cupom?</summary><p>Abra o carrinho, digite o código no campo de cupom e toque em Aplicar. O desconto aparece no resumo.</p></details>
+  <details><summary>Qual é a taxa de entrega?</summary><p>O valor aparece no resumo do carrinho antes de você confirmar. Alguns pedidos têm frete grátis a partir de um valor.</p></details>
+</section>
+</main>
+<footer class="foot"><div id="contato"></div><span id="foot-nome"></span> — Venda proibida para menores de 18 anos. Fumar faz mal à saúde.</footer>
+
+<aside class="drawer" id="drawer" aria-label="Carrinho">
+  <div class="d-head"><h3>Seu carrinho</h3><button id="close-cart" aria-label="Fechar">✕</button></div>
+  <div id="cart-items" class="d-items"></div>
+  <form id="checkout" class="d-foot">
+    <input name="cliente" placeholder="Seu nome" required autocomplete="name">
+    <input name="tel" placeholder="Telefone com DDD" required autocomplete="tel" inputmode="tel">
+    <input name="rua" placeholder="Rua / avenida" required autocomplete="street-address">
+    <div class="two"><input name="numero" placeholder="Número" required><input name="bairro" placeholder="Bairro" required></div>
+    <input name="comp" placeholder="Complemento (opcional)">
+    <div class="pay">
+      <label><input type="radio" name="pag" value="entrega" checked><span>Pagar na entrega</span></label>
+      <label><input type="radio" name="pag" value="agora"><span>Pagar agora</span></label>
+    </div>
+    <div class="cupom"><input id="cupom-in" placeholder="Cupom de desconto" autocomplete="off"><button type="button" class="btn" id="cupom-ok">Aplicar</button></div>
+    <small class="cupom-msg" id="cupom-msg"></small>
+    <div class="resumo" id="resumo"></div>
+    <div class="total"><span>Total</span><b id="cart-total">R$ 0,00</b></div>
+    <p id="fechado" class="fechado" hidden>A loja está fechada no momento. Volte mais tarde para pedir.</p>
+    <button class="btn solid big" type="submit">Confirmar pedido</button>
+  </form>
+</aside>
+<div class="scrim" id="scrim"></div>
+<div class="done" id="done" hidden><div class="gate-box"><h2 id="done-t">Pedido confirmado!</h2><p id="done-p"></p><button class="btn solid" id="done-ok">Voltar à loja</button></div></div>
+<div class="toast" id="toast"></div>
+<script src="store.js"></script>
+<script src="pagamento.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
