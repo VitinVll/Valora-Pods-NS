@@ -1,0 +1,2 @@
+# Valora-Pods-NS
+Loja
